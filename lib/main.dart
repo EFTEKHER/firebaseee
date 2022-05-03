@@ -20,7 +20,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Hello",
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(
+        brightness: Brightness.dark,
+      ),
       home:  StreamBuilder(stream: AuthService().firebaseAuth.authStateChanges()    ,builder: ((context, snapshot) {
         if(snapshot.hasData)
         {

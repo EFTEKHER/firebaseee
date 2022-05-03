@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebaseee/screens/add_note_screen.dart';
+import 'package:firebaseee/screens/edit_note_screen.dart';
 
 import '../services/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -28,42 +30,32 @@ class _HomeScreenState extends State<HomeScreen> {
               style: TextButton.styleFrom(primary: Colors.white))
         ],
       ),
-
-      body: Container(width: MediaQuery.of(context).size.width,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      body:ListView(
         children: [
-ElevatedButton(onPressed: ()async
-{
-  //create random id
-  // CollectionReference users=firestore.collection('users');
-  // await users.add({'name':'Efte'});
-  CollectionReference users=firestore.collection('users');
-  await users.doc('flutter 123').set({
-    'name':'Tonmoy'
-  });
-
-}, child: Text("Add Data To Firestore")),
-
-ElevatedButton(onPressed: ()async{
-//for read all value
-   CollectionReference users=firestore.collection('users');
-  // QuerySnapshot allResults = await users.get();
-  // allResults.docs.forEach((DocumentSnapshot results) { 
-  //   print(results.data());
- // });
-
- //for read particular element
- DocumentSnapshot result=await users.doc('flutter 123').get();
- print(result.data());
-
-}, child: Text('Read Data from Firestore'))
+          Card(
+            color:Colors.teal,
+            elevation: 5,
+            margin: EdgeInsets.all(10),
+            child:ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+              title: Text('App',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+              subtitle: Text('Learn to build a udemy app ',overflow: TextOverflow.ellipsis,maxLines: 2,),
+              onTap: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>EditNoteScreen() ));
+              },
+            ),
+          ),
         ],
-        
       ),
-      
-      ),
-    ));
+floatingActionButton: FloatingActionButton(onPressed: (){
+  Navigator.of(context).push(MaterialPageRoute(builder:(context)=>AddNoteScreen() ));
+},
+backgroundColor: Colors.orangeAccent,
+child: Icon(Icons.add)
+
+),
+     
+    )
+    );
   }
 }
