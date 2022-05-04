@@ -33,7 +33,7 @@ bool loading =false;
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: 30,),
+          SizedBox(height: 80,),
           TextField(
             controller: emailController,
             decoration: InputDecoration(
