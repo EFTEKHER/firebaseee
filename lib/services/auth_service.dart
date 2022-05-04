@@ -64,7 +64,7 @@ class AuthService {
       
       if (result != null) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+            context, MaterialPageRoute(builder: (context) => HomeScreen(user!)));
       }  // if result not null we simply call the MaterialpageRoute,
         // for go to the HomePage screen
     }

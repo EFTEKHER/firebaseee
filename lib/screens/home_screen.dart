@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebaseee/screens/add_note_screen.dart';
 import 'package:firebaseee/screens/edit_note_screen.dart';
 
@@ -6,13 +7,21 @@ import '../services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
+
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  User user;
+HomeScreen(this.user);
+  State<HomeScreen> createState() => _HomeScreenState(user);
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  FirebaseFirestore firestore=FirebaseFirestore.instance;
+   
+
+  
   @override
+   User user;
+  _HomeScreenState(this.user);
+  FirebaseFirestore firestore=FirebaseFirestore.instance;
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
@@ -48,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
 floatingActionButton: FloatingActionButton(onPressed: (){
-  Navigator.of(context).push(MaterialPageRoute(builder:(context)=>AddNoteScreen() ));
+  Navigator.of(context).push(MaterialPageRoute(builder:(context)=>AddNoteScreen(user) ));
 },
 backgroundColor: Colors.orangeAccent,
 child: Icon(Icons.add)

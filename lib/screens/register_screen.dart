@@ -1,3 +1,5 @@
+import 'package:firebaseee/screens/home_screen.dart';
+
 import '../services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +80,8 @@ bool loading =false;
            if(result!=null)
            {
              print("Success");
-             print(result.email);
+            // print(result.email);
+            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: ((context) => HomeScreen(result))), (route) => false);
            }
 
               } 

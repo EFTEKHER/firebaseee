@@ -56,7 +56,7 @@ bool loading =false;
            {
              print("Success");
              print(result.email);
-               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: ((context) => HomeScreen())), (route) => false);
+               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: ((context) => HomeScreen(result))), (route) => false);
              
            }
 
