@@ -3,7 +3,7 @@ import 'package:firebaseee/models/note.dart';
 import 'package:firebaseee/services/firestore_service.dart';
 import 'package:flutter/material.dart';
 import '../services/firestore_service.dart';
-import 'package:flutter/material.dart';
+
 
 // ignore: must_be_immutable
 class EditNoteScreen extends StatefulWidget {
@@ -20,7 +20,7 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
   bool loading=false;
   @override
   void initState() {
-    // TODO: implement initState
+    
     titleController.text=widget.note.title;
     descriptionController.text=widget.note.description;
     super.initState();

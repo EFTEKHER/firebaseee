@@ -33,6 +33,7 @@ bool loading =false;
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          SizedBox(height: 30,),
           TextField(
             controller: emailController,
             decoration: InputDecoration(
@@ -89,7 +90,7 @@ bool loading =false;
                 loading=false;
               });
 
-            },child: Text("Submit",style:TextStyle(fontStyle: FontStyle.italic,fontSize: 25)),),
+            },child: Text("Submit",style:TextStyle(fontWeight: FontWeight.bold,fontSize: 25)),),
           ),
           SizedBox(height: 20,),
           TextButton(onPressed: (){
