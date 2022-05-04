@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 class NoteModel {
 String id;
 String title;
@@ -14,7 +15,7 @@ String userId;
   });
 factory NoteModel.fromJson(DocumentSnapshot snapshot)
 {
-  return NoteModel(id: snapshot.id, title:snapshot['title'], description: snapshot['description'], date: snapshot['userId'], userId: snapshot['userId']);
+  return NoteModel(id: snapshot.id, title:snapshot['title'], description: snapshot['description'], date: snapshot['date'], userId: snapshot['userId']);
 }
 
 }

@@ -47,7 +47,7 @@ class AuthService {
     }
     return null;
   }
-  final GoogleSignIn googleSignIn = GoogleSignIn();
+   final GoogleSignIn googleSignIn = GoogleSignIn();
    Future<void> signInwithGoogle(BuildContext context) async {
   
     final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
@@ -62,6 +62,7 @@ class AuthService {
       UserCredential result = await firebaseAuth.signInWithCredential(authCredential); 
       User? user = result.user;
       
+      // ignore: unnecessary_null_comparison
       if (result != null) {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => HomeScreen(user!)));

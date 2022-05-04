@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebaseee/models/note.dart';
 import 'package:firebaseee/screens/add_note_screen.dart';
 import 'package:firebaseee/screens/edit_note_screen.dart';
-
+import 'package:intl/intl.dart';
 import '../services/auth_service.dart';
 import 'package:flutter/material.dart';
 
@@ -39,23 +40,39 @@ class _HomeScreenState extends State<HomeScreen> {
               style: TextButton.styleFrom(primary: Colors.white))
         ],
       ),
-      body:ListView(
-        children: [
-          Card(
-            color:Colors.teal,
+      body:StreamBuilder(stream:FirebaseFirestore.instance.collection('notes').where('userId',isEqualTo: user.uid).snapshots() ,builder:(context,AsyncSnapshot snapshot){
+        if(snapshot.hasData)
+        {
+if(snapshot.data.docs.length>0)
+{
+return ListView.builder(itemCount:snapshot.data.docs.length ,itemBuilder:( context,index){
+  NoteModel note=NoteModel.fromJson(snapshot.data.docs[index]);
+  return  Card(
+            color:Color.fromARGB(255, 72, 161, 193),
             elevation: 5,
             margin: EdgeInsets.all(10),
             child:ListTile(
               contentPadding: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
-              title: Text('App',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
-              subtitle: Text('Learn to build a udemy app ',overflow: TextOverflow.ellipsis,maxLines: 2,),
+              
+              title: Text(note.title,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+              subtitle: Text(note.description,overflow: TextOverflow.ellipsis,maxLines: 2,),
+              leading: CircleAvatar(radius: 30,backgroundColor: Color.fromARGB(255, 243, 128, 33),child: Padding(padding: EdgeInsets.all(5),child: Text(DateFormat.yMd().format(note.date.toDate(),),)),),
               onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>EditNoteScreen() ));
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>EditNoteScreen(note) ));
               },
             ),
-          ),
-        ],
-      ),
+          );
+} , );
+}
+else{
+  return Center(child:Text("No Notes"));
+}
+        }
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+
+      },),
 floatingActionButton: FloatingActionButton(onPressed: (){
   Navigator.of(context).push(MaterialPageRoute(builder:(context)=>AddNoteScreen(user) ));
 },

@@ -37,15 +37,13 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
              TextField(
                controller: descriptionController,
                minLines: 5,
-               maxLines: 15,
+               maxLines: 1000,
                decoration: InputDecoration(border:OutlineInputBorder()),
 
              ),
             SizedBox(height: 20,),
 
-          loading?CircularProgressIndicator():  Center(
-
-              child: Container(height: 50,
+          loading?Center(child :CircularProgressIndicator(),):  Container(height: 50,
               
               width: MediaQuery.of(context).size.width,
               child:  ElevatedButton(onPressed: ()async{
@@ -66,7 +64,7 @@ Navigator.pop(context);
 
               },child: Text('Add note',style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),style: ElevatedButton.styleFrom(primary: Colors.pink),),
               ),
-            )
+            
            ],
          ),
       )
