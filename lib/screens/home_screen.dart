@@ -56,7 +56,7 @@ return ListView.builder(itemCount:snapshot.data.docs.length ,itemBuilder:( conte
               
               title: Text(note.title,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
               subtitle: Text(note.description,overflow: TextOverflow.ellipsis,maxLines: 2,),
-              leading: CircleAvatar(radius: 30,backgroundColor: Color.fromARGB(255, 243, 128, 33),child: Padding(padding: EdgeInsets.all(5),child: Text(DateFormat.yMd().format(note.date.toDate(),),)),),
+              leading: CircleAvatar(radius: 30,backgroundColor: Color.fromARGB(255, 211, 153, 183),child: Padding(padding: EdgeInsets.all(5),child: Text(DateFormat('MMM d,yyyy').format(note.date.toDate(),),)),),
               onTap: (){
                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=>EditNoteScreen(note) ));
               },

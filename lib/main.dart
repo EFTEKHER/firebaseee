@@ -1,4 +1,6 @@
 // ignore: prefer_const_constructors
+import 'package:firebaseee/screens/upload_image.dart';
+
 import '../screens/home_screen.dart';
 import '../screens/register_screen.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
       home:  StreamBuilder(stream: AuthService().firebaseAuth.authStateChanges()    ,builder: ((context,AsyncSnapshot snapshot) {
         if(snapshot.hasData)
         {
-          return HomeScreen(snapshot.data);
+          return UploadImageScreen();
         }
         
           return RegisterScreen();
