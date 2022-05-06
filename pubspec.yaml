@@ -44,6 +44,7 @@ dependencies:
   firebase_storage: ^10.2.15
   firebase_storage_web: ^3.2.14
   image_picker: ^0.8.5
+  flutter_native_image: ^0.0.6+1
 dev_dependencies:
   flutter_test:
     sdk: flutter
