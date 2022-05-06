@@ -1,8 +1,9 @@
+import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
-import 'dart:io';
 class UploadImageScreen extends StatefulWidget {
   const UploadImageScreen({ Key? key }) : super(key: key);
 
@@ -23,11 +24,14 @@ final picker=ImagePicker();
  }
  String fileName=pickedImage.name;
  File imageFile=File(pickedImage.path);
+ File compresedFile=await compressImage(imageFile);
+
  try{
    setState(() {
      loading=true;
    });
-   await firebasestorage.ref(fileName).putFile(imageFile);
+  //  await firebasestorage.ref(fileName).putFile(imageFile);
+  await firebasestorage.ref(fileName).putFile(compresedFile);
    setState(() {
      loading=false;
    });
@@ -66,7 +70,18 @@ await firebasestorage.ref(ref).delete();
 setState(() {
   
 });
-}  @override
+} 
+Future <File> compressImage(File file)async{
+File compressedFile= await FlutterNativeImage.compressImage(file.path,quality: 30);
+print('orginal file size');
+print(file.lengthSync());
+print('Compressed file length');
+print(compressedFile.lengthSync());
+return compressedFile;
+
+}
+
+ @override
   Widget build(BuildContext context) {
     return SafeArea(child:Scaffold(appBar: AppBar(title: Text('upload Image to firebase'),centerTitle: true,),
     body: Padding(padding: EdgeInsets.all(20),
@@ -100,7 +115,9 @@ setState(() {
                 Card(
                   child: Container(
                     height: 200,
-                    child: Image.network(image['url']),
+                    child: CachedNetworkImage(imageUrl: image['url'],placeholder: (context,url)=>Image.asset('images/placeholder.jpg'),
+                   errorWidget: (context,url,error)=>Icon(Icons.error), 
+                    ),
                   ),
                 ),
                 
